@@ -2,14 +2,22 @@ i.icon {
     font-size: 2rem;
 }
 
-.container.segment.main {
+.container.main {
     margin-top: 6rem;
 }
 
-img {
-    width: 65%;
+.ui.text.container{
+    max-width: 800px !important;
 }
 
 #deleteBtn {
     display: inline;
+}
+
+.inverted.button {
+    width: 80px;
+}
+
+.extra .inverted.button {
+    width: 120px;
 }

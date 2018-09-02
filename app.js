@@ -1,13 +1,15 @@
 // Dependencies
-var methodOverride = require("method-override"),
-    bodyParser  = require("body-parser"),
+var expressSanitizer    = require("express-sanitizer"),
+    methodOverride      = require("method-override"),
+    bodyParser          = require("body-parser"),
     mongoose    = require("mongoose"),
     express     = require("express"),
     app         = express();
     
 // Middleware config
-mongoose.connect("mongodb://localhost/restful_blog_app");
+mongoose.connect("mongodb://localhost/restful_blog_app", {useNewUrlParser: true});
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer()); // make sure it goes after body-parser
 app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -54,6 +56,8 @@ app.get("/blogs/new", function(req, res) {
 
 // CREATE route
 app.post("/blogs", function(req, res){
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    
     Blog.create(req.body.blog, function(err, newBlog){
         if(err){
             res.render("new");
@@ -87,6 +91,8 @@ app.get("/blogs/:id/edit", function(req, res) {
 
 // UPDATE route
 app.put("/blogs/:id", function(req, res){
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
         if(err){
             res.redirect("/blogs");

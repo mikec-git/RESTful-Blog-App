@@ -12,9 +12,9 @@
                 <!-- The '-' will display whatever HTML is shown in the body -->
                 <p><%- blog.body %></p>
             </div>
-            <a href="/blogs/<%= blog._id %>/edit" class="ui inverted green button">Edit</a>
+            <a href="/blogs/<%= blog._id %>/edit" class="ui center aligned inverted green button">Edit</a>
             <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" id="deleteBtn">
-                <button class="ui inverted red button">Delete</button>
+                <button class="ui center aligned inverted red button">Delete</button>
             </form>
         </div>
     </div>
