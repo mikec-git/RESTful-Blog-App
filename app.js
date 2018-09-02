@@ -30,10 +30,12 @@ var Blog = mongoose.model("Blog", blogSchema);
 
 
 //RESTful routes
+// Root index
 app.get("/", function(req, res) {
     res.redirect("/blogs");
 });
 
+// INDEX route
 app.get("/blogs", function(req, res){
     Blog.find({},function(err, blogs){
         if(err){
@@ -44,7 +46,24 @@ app.get("/blogs", function(req, res){
     });
 });
 
+// NEW route
+app.get("/blogs/new", function(req, res) {
+    res.render("new");
+});
 
+// CREATE route
+app.post("/blogs", function(req, res){
+    Blog.create(req.body.blog, function(err, newBlog){
+        if(err){
+            res.render("new");
+        } else{
+            res.redirect("/blogs");
+        }
+    });
+});
+
+
+// Server connection
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Blog app server has started...");
 })
