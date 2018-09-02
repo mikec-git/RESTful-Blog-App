@@ -5,3 +5,7 @@ i.icon {
 .container.segment.main {
     margin-top: 6rem;
 }
+
+img {
+    width: 65%;
+}

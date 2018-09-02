@@ -62,6 +62,16 @@ app.post("/blogs", function(req, res){
     });
 });
 
+// SHOW route
+app.get("/blogs/:id", function(req, res) {
+    Blog.findById(req.params.id, function(err, foundBlog){
+        if(err){
+            res.redirect("/blogs");
+        } else{
+            res.render("show", {blog: foundBlog});
+        }
+    });
+});
 
 // Server connection
 app.listen(process.env.PORT, process.env.IP, function(){
