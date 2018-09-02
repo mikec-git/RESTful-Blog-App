@@ -9,3 +9,7 @@ i.icon {
 img {
     width: 65%;
 }
+
+#deleteBtn {
+    display: inline;
+}

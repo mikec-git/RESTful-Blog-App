@@ -30,7 +30,6 @@ var Blog = mongoose.model("Blog", blogSchema);
 //     body: "This is a test blog demo"
 // });
 
-
 //RESTful routes
 // Root index
 app.get("/", function(req, res) {
@@ -95,6 +94,17 @@ app.put("/blogs/:id", function(req, res){
             res.redirect("/blogs/" + req.params.id);
         }
     });
+});
+
+// DELETE route
+app.delete("/blogs/:id", function(req, res){
+    Blog.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/blogs");
+        } else{
+            res.redirect("/blogs");
+        }
+    })
 });
 
 // Server connection
